@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tiburciohugo/rest-api-test/handler"
 )
 
 func initializeRoutes(r *gin.Engine) {
@@ -14,31 +15,11 @@ func initializeRoutes(r *gin.Engine) {
 				"message": "pong",
 			})
 		})
-		v1.GET("/todo", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "GET todo",
-			})
-		})
-		v1.POST("/todo", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "POST todo",
-			})
-		})
-		v1.DELETE("/todo", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "DELETE todo",
-			})
-		})
-		v1.PUT("/todo", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "PUT todo",
-			})
-		})
-		v1.GET("/todos", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "GET todos",
-			})
-		})
+		v1.GET("/todo", handler.ShowTodoHandler)
+		v1.POST("/todo", handler.CreateTodoHandler)
+		v1.DELETE("/todo", handler.DeleteTodoHandler)
+		v1.PUT("/todo", handler.UpdateTodoHandler)
+		v1.GET("/todos", handler.ListTodoHandler)
 	}
 
 }
