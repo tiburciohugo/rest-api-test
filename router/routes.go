@@ -19,7 +19,7 @@ func initializeRoutes(r *gin.Engine) {
 		v1.POST("/todo", handler.CreateTodoHandler)
 		v1.DELETE("/todo", handler.DeleteTodoHandler)
 		v1.PUT("/todo", handler.UpdateTodoHandler)
-		v1.GET("/todos", handler.ListTodoHandler)
+		v1.GET("/todos", handler.ListTodosHandler)
 	}
 
 }
