@@ -7,6 +7,19 @@ import (
 	"github.com/tiburciohugo/rest-api-test/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Create a todo
+// @Description Create a new todo
+// @Tags Todos
+// @Accept  json
+// @Produce  json
+// @Param request body CreateTodoRequest true "Request Body"
+// @Success 200 {object} CreateTodoResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /todo [post]
+
 func CreateTodoHandler(c *gin.Context) {
 	request := CreateTodoRequest{}
 
