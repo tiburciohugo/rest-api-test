@@ -9,7 +9,7 @@ func errParamIsRequired(name, typ string) error {
 type CreateTodoRequest struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
-	Completed   bool  `json:"completed"`
+	Completed   bool   `json:"completed"`
 }
 
 func (r *CreateTodoRequest) Validate() error {
@@ -23,4 +23,17 @@ func (r *CreateTodoRequest) Validate() error {
 		return errParamIsRequired("description", "string")
 	}
 	return nil
+}
+
+type UpdateTodoRequest struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Completed   bool   `json:"completed"`
+}
+
+func (r *UpdateTodoRequest) Validate() error {
+	if r.Title != "" || r.Description != "" {
+		return nil
+	}
+	return fmt.Errorf("at least one of the following fields must be present: title, description")
 }

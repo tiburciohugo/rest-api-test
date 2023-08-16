@@ -4,12 +4,17 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/tiburciohugo/rest-api-test/docs"
 	"github.com/tiburciohugo/rest-api-test/handler"
 )
 
 func initializeRoutes(r *gin.Engine) {
 	handler.InitializeHandler()
-	v1 := r.Group("/api/v1")
+	basePath := "/api/v1"
+	docs.SwaggerInfo.BasePath = basePath
+	v1 := r.Group(basePath)
 	{
 		v1.GET("/ping", func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
@@ -22,5 +27,6 @@ func initializeRoutes(r *gin.Engine) {
 		v1.PUT("/todo", handler.UpdateTodoHandler)
 		v1.GET("/todos", handler.ListTodosHandler)
 	}
-
+	// Initialize Swagger
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }
